@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خزانة ماريا الصغيرة 🎀 - متجر الهدايا والإكسسوارات</title>
+    
+    <!-- استيراد خط Cairo العربي من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة Tailwind CSS للتنسيق والألوان -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        body {
+            font-family: 'Cairo', Tahoma, sans-serif;
+            background-color: #fff5f7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            border: 2px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+        .color-dot.selected {
+            border-color: #db2777;
+            transform: scale(1.18);
+            box-shadow: 0 0 0 2px rgba(219, 39, 119, 0.3);
+        }
+        #lightboxModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- نافذة تكبير الصورة المنبثقة -->
+    <div id="lightboxModal" onclick="closeLightbox()">
+        <div class="relative max-w-3xl w-full bg-white p-4 rounded-2xl text-center" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute top-2 left-2 bg-pink-600 text-white w-8 h-8 rounded-full font-bold text-lg flex items-center justify-center hover:bg-pink-700 transition">×</button>
+            <img id="lightboxImg" src="" alt="صورة مكبرة" class="max-h-[80vh] mx-auto object-contain rounded-lg">
+        </div>
+    </div>
+
+    <!-- الهيدر والترحيب -->
+    <header class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-6 mb-8 text-center border border-pink-200">
+        <h1 class="text-3xl md:text-4xl font-bold text-pink-700 mb-2">خَزَانَةُ مَارِيَا الصَّغِيرَةُ 🎀</h1>
+        <p class="text-pink-900 font-medium text-lg mb-2">✨ تشكيلة ناعمة ومستلزماتُ مختارةٌ بعناية لِتُلامِسَ قُلوبَكُم ✨</p>
+        <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-3">
+            أهلاً وسهلاً بكم في خزانة ماريا الصغيرة! 🌸 هذا مشروع طفلتي "ماريا"، وبدعمكم وتشجيعكم المستمر تكتمل فرحتها 🤍<br>
+            نشارككم قطعاً ناعمة لترسم لمسة أنيقة على يومكم.. ومع كل اختيار منكم، نكبر معاً لنُوفّر لكم في كل مرة قطعاً جديدة ومتميزة!
+        </p>
+        <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-3 bg-pink-50 border border-pink-200 text-pink-800 text-xs md:text-sm font-semibold px-4 py-2.5 rounded-xl">
+            <span>📍 عنوان الاستلام من المقر: التجمع الأول - المجاورة 6 - فيلا 250</span>
+            <span class="hidden sm:inline">|</span>
+            <span>📞 للتواصل: <a href="https://wa.me/201099771745" target="_blank" class="underline hover:text-pink-600 font-bold">01099771745</a></span>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8">
+        
+        <!-- قسم المنتجات -->
+        <section class="lg:w-2/3 w-full">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold text-gray-800 border-r-4 border-pink-500 pr-3">قائمة المنتجات 🛍️</h2>
+                <span class="text-xs bg-pink-100 text-pink-700 font-bold px-3 py-1 rounded-full">توصيل مجاني للطلبات فوق 600 ج.م</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="productsGrid"></div>
+        </section>
+
+        <!-- سلة المشتريات -->
+        <aside class="lg:w-1/3 w-full">
+            <div class="bg-white rounded-2xl shadow-md p-6 sticky top-4 border border-pink-200">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2 flex justify-between items-center">
+                    <span>🛒 سلة المشتريات</span>
+                    <span id="cartBadge" class="bg-pink-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+                </h2>
+                
+                <div id="cartItems" class="space-y-3 mb-4 max-h-48 overflow-y-auto">
+                    <p class="text-gray-400 text-center py-4">🌸 السلة فارغة! يرجى اختيار بعض المنتجات لدعم ماريا 🌸</p>
+                </div>
+
+                <div id="freeShippingNotice" class="mb-4 p-2.5 bg-pink-50 rounded-xl border border-pink-100 text-xs text-center text-pink-700 font-medium hidden"></div>
+
+                <div class="mb-4 border-t pt-4">
+                    <label class="block font-semibold text-gray-700 mb-2 text-sm">طريقة الاستلام والتوصيل:</label>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center justify-between p-2.5 rounded-lg border border-gray-200 hover:bg-pink-50 transition cursor-pointer">
+                            <div class="flex items-center gap-2">
+                                <input type="radio" name="deliveryType" value="delivery" checked onchange="updateTotal()" class="accent-pink-600">
+                                <span class="font-medium text-gray-700">توصيل للمنزل</span>
+                            </div>
+                            <span id="deliveryLabelFee" class="text-xs font-bold text-pink-600">75 ج.م</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2.5 rounded-lg border border-gray-200 hover:bg-pink-50 transition cursor-pointer">
+                            <div class="flex items-center gap-2">
+                                <input type="radio" name="deliveryType" value="pickup" onchange="updateTotal()" class="accent-pink-600">
+                                <span class="font-medium text-gray-700">استلام من المقر (التجمع الأول)</span>
+                            </div>
+                            <span class="text-xs font-bold text-green-600">مجاناً</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-4 border-t pt-4 space-y-3">
+                    <label class="block font-semibold text-gray-700 text-sm">بيانات التوصيل الخاصة بك:</label>
+                    <input type="text" id="clientName" placeholder="اسمك الكريم" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500">
+                    <input type="tel" id="clientPhone" placeholder="رقم الهاتف للتواصل" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500">
+                    <textarea id="clientAddress" placeholder="عنوان التوصيل بالتفصيل (المدينة، الشارع، رقم الحارة/العمارة)" rows="2" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500"></textarea>
+                </div>
+
+                <div class="border-t pt-4 space-y-2 mb-6 text-sm">
+                    <div class="flex justify-between text-gray-600">
+                        <span>مجموع المنتجات:</span>
+                        <span id="subtotalPrice">0 ج.م</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>رسوم التوصيل:</span>
+                        <span id="deliveryPrice">75 ج.م</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold text-gray-900 border-t pt-2">
+                        <span>الإجمالي النهائي:</span>
+                        <span id="finalTotal" class="text-pink-600">0 ج.م</span>
+                    </div>
+                </div>
+
+                <button onclick="sendOrderViaWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-xl shadow transition duration-200 flex items-center justify-center gap-2">
+                    <span>إرسال الطلب عبر الواتساب 📱</span>
+                </button>
+            </div>
+        </aside>
+    </main>
+
+    <!-- البرمجة والربط بالصور الجديدة المطابقة -->
+    <script>
+        const whatsappNumber = "201099771745"; 
+
+        const products = [
+            { 
+                id: 1, 
+                name: "شال فرو برجندي فاخر", 
+                price: 400, 
+                colors: [
+                    { name: "برجندي", hex: "#701a75", image: "images/scarf.jpg", stock: 5 }
+                ] 
+            },
+            { 
+                id: 2, 
+                name: "ودانات فرو ناعمة", 
+                price: 250, 
+                colors: [
+                    { name: "كشمير", hex: "#e892a0", image: "images/earmuffs-pink.jpg", stock: 2 },
+                    { name: "أوف وايت", hex: "#fef3c7", image: "images/earmuffs-white.jpg", stock: 4 },
+                    { name: "كافيه", hex: "#d2b48c", image: "images/earmuffs-beige.jpg", stock: 4 },
+                    { name: "أسود", hex: "#1f2937", image: "images/earmuffs-black.jpg", stock: 2 }
+                ] 
+            },
+            { 
+                id: 3, 
+                name: "إسفنجة تصفيف الشعر ويفي بدون حرارة", 
+                price: 175, 
+                usageImage: "images/roller-usage.jpg",
+                colors: [
+                    { name: "بينك", hex: "#f472b6", image: "images/roller-pink.jpg", stock: 4 },
+                    { name: "بينك غامق", hex: "#db2777", image: "images/roller-darkpink.jpg", stock: 6 },
+                    { name: "أوف وايت", hex: "#fef3c7", image: "images/roller-white.jpg", stock: 4 },
+                    { name: "بيربل", hex: "#c084fc", image: "images/roller-purple.jpg", stock: 6 },
+                    { name: "أسود", hex: "#1f2937", image: "images/roller-black.jpg", stock: 3 }
+                ] 
+            }
+        ];
+
+        let cart = [];
+        let selectedColors = {};
+        let currentImages = {};
+
+        products.forEach(p => {
+            if (p.colors && p.colors.length > 0) {
+                selectedColors[p.id] = p.colors[0].name;
+                currentImages[p.id] = p.colors[0].image;
+            }
+        });
+
+        function openLightbox(imgSrc) {
+            const modal = document.getElementById('lightboxModal');
+            const modalImg = document.getElementById('lightboxImg');
+            modalImg.src = imgSrc;
+            modal.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        function selectColor(productId, colorName, imagePath) {
+            selectedColors[productId] = colorName;
+            currentImages[productId] = imagePath;
+            displayProducts(); 
+        }
+
+        function showUsageImage(productId, usageImgPath) {
+            currentImages[productId] = usageImgPath;
+            displayProducts();
+        }
+
+        function displayProducts() {
+            const grid = document.getElementById("productsGrid");
+            grid.innerHTML = "";
+            
+            products.forEach(product => {
+                let activeColorObj = product.colors.find(c => c.name === selectedColors[product.id]) || product.colors[0];
+                let displayImg = currentImages[product.id] || activeColorObj.image;
+                let availableStock = activeColorObj.stock;
+
+                let colorsHtml = `<div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs text-gray-500 font-medium">اللون:</span>
+                    <div class="flex items-center gap-1.5">`;
+                
+                product.colors.forEach(c => {
+                    let isSelected = (selectedColors[product.id] === c.name && displayImg === c.image) ? 'selected' : '';
+                    colorsHtml += `<span class="color-dot ${isSelected}" style="background-color: ${c.hex};" title="${c.name} (متوفر: ${c.stock})" onclick="selectColor(${product.id}, '${c.name}', '${c.image}')"></span>`;
+                });
+                
+                colorsHtml += `</div></div>`;
+
+                let usageBtnHtml = "";
+                if (product.usageImage) {
+                    usageBtnHtml = `
+                        <button onclick="showUsageImage(${product.id}, '${product.usageImage}')" class="text-xs text-pink-600 hover:text-pink-800 font-semibold underline mb-2 inline-block">
+                            💡 عرض طريقة الاستخدام
+                        </button>
+                    `;
+                }
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-xl shadow-sm p-4 border border-pink-100 flex flex-col justify-between hover:shadow-md transition">
+                        <div>
+                            <img src="${displayImg}" alt="${product.name}" onclick="openLightbox(this.src)" class="w-full h-52 object-contain rounded-lg mb-2 bg-gray-50 cursor-pointer hover:opacity-90 transition" title="انقر لتكبير الصورة 🔍">
+                            ${usageBtnHtml}
+                            <h3 class="font-bold text-gray-800 text-sm md:text-base mb-1">${product.name}</h3>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-pink-600 font-bold text-base">${product.price} ج.م</span>
+                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">المتوفر: ${availableStock} قطع</span>
+                            </div>
+                            ${colorsHtml}
+                        </div>
+                        <button onclick="addToCart(${product.id})" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm py-2 px-3 rounded-lg font-medium transition">
+                            أضف للسلة 🛍️
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const chosenColorName = selectedColors[productId];
+            const colorObj = product.colors.find(c => c.name === chosenColorName);
+
+            const cartItem = cart.find(item => item.id === productId && item.color === chosenColorName);
+            let currentCartQty = cartItem ? cartItem.quantity : 0;
+
+            if (currentCartQty + 1 > colorObj.stock) {
+                alert(`عذراً، الكمية المطلوبة من هذا اللون تفوق المخزون المتوفر (${colorObj.stock} قطع فقط).`);
+                return;
+            }
+
+            if (cartItem) {
+                cartItem.quantity += 1;
+            } else {
+                cart.push({ 
+                    ...product, 
+                    color: chosenColorName, 
+                    quantity: 1,
+                    cartId: `${productId}-${chosenColorName}`
+                });
+            }
+            updateCartUI();
+        }
+
+        function changeQuantity(cartId, delta) {
+            const cartItem = cart.find(item => item.cartId === cartId);
+            if (cartItem) {
+                const [pId, cName] = cartId.split('-');
+                const product = products.find(p => p.id == pId);
+                const colorObj = product.colors.find(c => c.name === cName);
+
+                if (delta > 0 && cartItem.quantity + 1 > colorObj.stock) {
+                    alert(`عذراً، الكمية المتوفرة في المخزون هي ${colorObj.stock} قطع فقط.`);
+                    return;
+                }
+
+                cartItem.quantity += delta;
+                if (cartItem.quantity <= 0) {
+                    cart = cart.filter(item => item.cartId !== cartId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartContainer = document.getElementById("cartItems");
+            const subtotalEl = document.getElementById("subtotalPrice");
+            const cartBadge = document.getElementById("cartBadge");
+            
+            let totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.innerText = totalCount;
+            
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `<p class="text-gray-400 text-center py-4">🌸 السلة فارغة! يرجى اختيار بعض المنتجات لدعم ماريا 🌸</p>`;
+                subtotalEl.innerText = "0 ج.م";
+                updateTotal();
+                return;
+            }
+
+            cartContainer.innerHTML = "";
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                cartContainer.innerHTML += `
+                    <div class="flex justify-between items-center text-sm border-b pb-2">
+                        <div class="flex-1">
+                            <span class="font-semibold text-gray-800 block">${item.name}</span>
+                            <span class="text-xs text-gray-500 block">اللون: ${item.color}</span>
+                            <span class="text-xs text-pink-600 font-bold">${item.price * item.quantity} ج.م</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-pink-50 rounded-lg p-1 border border-pink-100">
+                            <button onclick="changeQuantity('${item.cartId}', -1)" class="w-5 h-5 rounded bg-white text-pink-600 font-bold flex items-center justify-center hover:bg-pink-100 shadow-sm">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.cartId}', 1)" class="w-5 h-5 rounded bg-white text-pink-600 font-bold flex items-center justify-center hover:bg-pink-100 shadow-sm">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            subtotalEl.innerText = subtotal + " ج.م";
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+            const freeNotice = document.getElementById("freeShippingNotice");
+            const deliveryLabelFee = document.getElementById("deliveryLabelFee");
+            
+            let deliveryFee = 0;
+
+            if (deliveryType === 'delivery') {
+                if (subtotal >= 600) {
+                    deliveryFee = 0;
+                    freeNotice.classList.remove("hidden");
+                    freeNotice.innerHTML = "🎉 مبروك! لقد حصلت على <b>توصيل مجاني</b> لأن إجمالي طلبك 600 جنيه أو أكثر.";
+                    deliveryLabelFee.innerText = "مجاناً 🎁";
+                    deliveryLabelFee.className = "text-xs font-bold text-green-600";
+                } else {
+                    deliveryFee = cart.length > 0 ? 75 : 0;
+                    freeNotice.classList.remove("hidden");
+                    let needed = 600 - subtotal;
+                    freeNotice.innerHTML = `💡 أضف منتجات بقيمة <b>${needed} ج.م</b> إضافية لتحصل على <b>توصيل مجاني</b>!`;
+                    deliveryLabelFee.innerText = "75 ج.م";
+                    deliveryLabelFee.className = "text-xs font-bold text-pink-600";
+                }
+            } else {
+                deliveryFee = 0;
+                freeNotice.classList.add("hidden");
+            }
+
+            document.getElementById("deliveryPrice").innerText = deliveryFee + " ج.م";
+            let finalTotal = subtotal + deliveryFee;
+            document.getElementById("finalTotal").innerText = finalTotal + " ج.م";
+        }
+
+        function sendOrderViaWhatsApp() {
+            if (cart.length === 0) {
+                alert("السلة فارغة! يرجى اختيار بعض المنتجات أولاً لدعم ماريا ✨");
+                return;
+            }
+
+            const name = document.getElementById("clientName").value.trim();
+            const phone = document.getElementById("clientPhone").value.trim();
+            const address = document.getElementById("clientAddress").value.trim();
+
+            if (!name || !phone || !address) {
+                alert("يرجى تعبئة (الاسم، رقم الهاتف، وعنوان التوصيل) قبل إرسال الطلب.");
+                return;
+            }
+
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let deliveryFee = (deliveryType === 'delivery' && subtotal < 600) ? 75 : 0;
+            
+            let deliveryText = "";
+            if (deliveryType === 'delivery') {
+                deliveryText = subtotal >= 600 ? 'توصيل للمنزل (مجاني 🎉)' : 'توصيل للمنزل (75 ج.م)';
+            } else {
+                deliveryText = 'استلام من المقر (التجمع الأول - المجاورة 6 - فيلا 250)';
+            }
+
+            let message = "🌸 *طلب جديد من خزانة ماريا الصغيرة* 🎀\n\n";
+            message += `👤 *اسم العميل:* ${name}\n`;
+            message += `📞 *رقم الهاتف:* ${phone}\n`;
+            message += `📍 *العنوان:* ${address}\n`;
+            message += `🚚 *طريقة الاستلام:* ${deliveryText}\n\n`;
+            message += `🛒 *المنتجات المطلوبة:*\n`;
+
+            cart.forEach(item => {
+                message += `• ${item.name} (${item.color}) | الكمية: ${item.quantity} | السعر: ${item.price * item.quantity} ج.م\n`;
+            });
+
+            let finalTotal = subtotal + deliveryFee;
+
+            message += `\n📦 *مجموع المنتجات:* ${subtotal} ج.م`;
+            message += `\n🚚 *رسوم التوصيل:* ${deliveryFee} ج.م`;
+            message += `\n💰 *الإجمالي النهائي:* ${finalTotal} ج.م\n\n✨ بانتظار تجهيز الطلب بحب لماريا ودعم مشروعها الصغير! 🤍`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
+        }
+
+        displayProducts();
+    </script>
+</body>
+</html>
