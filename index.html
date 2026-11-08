@@ -72,96 +72,8 @@
         </div>
     </header>
 
-    <!-- قسم استطلاع رأي المنتجات المقترحة القادمة -->
-    <section class="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-6 mb-8 border border-pink-200">
-        <div class="text-center mb-6">
-            <h2 class="text-2xl font-bold text-pink-700 mb-1">✨ شاركونا رأيكم في منتجاتنا القادمة ✨</h2>
-            <p class="text-gray-600 text-sm md:text-base">لو توفرت هذه القطع في المتجر قريباً، هل ترغبون بشرائها؟</p>
-        </div>
-
-        <!-- شبكة عرض الصور الـ 5 المخصصة للاستطلاع -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            
-            <!-- قطعة 1: البندانات -->
-            <div class="bg-pink-50/50 rounded-xl p-3 border border-pink-100 flex flex-col justify-between text-center hover:shadow-sm transition">
-                <div>
-                    <img src="images/banda.jpeg" alt="بندانات شعر ناعمة" onclick="openLightbox(this.src)" class="w-full h-44 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">بندانات شعر بناتي</h3>
-                </div>
-                <div class="mt-2">
-                    <div class="poll-buttons flex justify-center gap-2">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-gray-200 transition">لا 👎</button>
-                    </div>
-                    <p class="vote-msg hidden text-xs font-bold mt-2 text-pink-600"></p>
-                </div>
-            </div>
-
-            <!-- قطعة 2: طوق باندا -->
-            <div class="bg-pink-50/50 rounded-xl p-3 border border-pink-100 flex flex-col justify-between text-center hover:shadow-sm transition">
-                <div>
-                    <img src="images/banda0.jpeg" alt="طوق شعر الباندا" onclick="openLightbox(this.src)" class="w-full h-44 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">طوق الباندا لطيف</h3>
-                </div>
-                <div class="mt-2">
-                    <div class="poll-buttons flex justify-center gap-2">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-gray-200 transition">لا 👎</button>
-                    </div>
-                    <p class="vote-msg hidden text-xs font-bold mt-2 text-pink-600"></p>
-                </div>
-            </div>
-
-            <!-- قطعة 3: محفظة صغيرة -->
-            <div class="bg-pink-50/50 rounded-xl p-3 border border-pink-100 flex flex-col justify-between text-center hover:shadow-sm transition">
-                <div>
-                    <img src="images/book.jpeg" alt="محفظة صغيرة ممتعة" onclick="openLightbox(this.src)" class="w-full h-44 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">محفظة صغيرة بألوان ناعمة</h3>
-                </div>
-                <div class="mt-2">
-                    <div class="poll-buttons flex justify-center gap-2">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-gray-200 transition">لا 👎</button>
-                    </div>
-                    <p class="vote-msg hidden text-xs font-bold mt-2 text-pink-600"></p>
-                </div>
-            </div>
-
-            <!-- قطعة 4: محفظة جلد مبطنة -->
-            <div class="bg-pink-50/50 rounded-xl p-3 border border-pink-100 flex flex-col justify-between text-center hover:shadow-sm transition">
-                <div>
-                    <img src="images/book0.jpeg" alt="محفظة جلدية مبطنة" onclick="openLightbox(this.src)" class="w-full h-44 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">محفظة جلد أنيقة</h3>
-                </div>
-                <div class="mt-2">
-                    <div class="poll-buttons flex justify-center gap-2">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-gray-200 transition">لا 👎</button>
-                    </div>
-                    <p class="vote-msg hidden text-xs font-bold mt-2 text-pink-600"></p>
-                </div>
-            </div>
-
-            <!-- قطعة 5: ودانات أطفال أرنوب -->
-            <div class="bg-pink-50/50 rounded-xl p-3 border border-pink-100 flex flex-col justify-between text-center hover:shadow-sm transition">
-                <div>
-                    <img src="images/ear.jpeg" alt="ودانات أرنوب متحركة" onclick="openLightbox(this.src)" class="w-full h-44 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">ودانات فرو أرنب متحركة</h3>
-                </div>
-                <div class="mt-2">
-                    <div class="poll-buttons flex justify-center gap-2">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-gray-200 transition">لا 👎</button>
-                    </div>
-                    <p class="vote-msg hidden text-xs font-bold mt-2 text-pink-600"></p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- المحتوى الرئيسي -->
-    <main class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8">
+    <!-- المحتوى الرئيسي (المنتجات والسلة) -->
+    <main class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 mb-12">
         
         <!-- قسم المنتجات الحالية -->
         <section class="lg:w-2/3 w-full">
@@ -236,7 +148,95 @@
         </aside>
     </main>
 
-    <!-- البرمجة والربط بالصور الجاهزة -->
+    <!-- قسم استطلاع رأي المنتجات المقترحة (مضغوط وفي الأسفل) -->
+    <section class="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-6 mb-8 border border-pink-200">
+        <div class="text-center mb-6">
+            <h2 class="text-2xl font-bold text-pink-700 mb-1">✨ شاركونا رأيكم في منتجاتنا القادمة ✨</h2>
+            <p class="text-gray-600 text-sm">لو توفرت هذه القطع في المتجر قريباً، هل ترغبون بشرائها؟</p>
+        </div>
+
+        <!-- شبكة عرض الصور الـ 5 (بحجم أصغر ومناسب) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            
+            <!-- قطعة 1: البندانات -->
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
+                <div>
+                    <img src="images/banda.jpeg" alt="بندانات شعر ناعمة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">بندانات شعر بناتي</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-gray-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+            <!-- قطعة 2: طوق باندا -->
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
+                <div>
+                    <img src="images/banda0.jpeg" alt="طوق شعر الباندا" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">طوق الباندا لطيف</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-gray-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+            <!-- قطعة 3: محفظة صغيرة -->
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
+                <div>
+                    <img src="images/book.jpeg" alt="محفظة صغيرة ممتعة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">محفظة صغيرة ناعمة</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+            <!-- قطعة 4: محفظة جلد مبطنة -->
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
+                <div>
+                    <img src="images/book0.jpeg" alt="محفظة جلدية مبطنة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">محفظة جلد أنيقة</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+            <!-- قطعة 5: ودانات أطفال أرنوب -->
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center sm:col-span-1 col-span-2">
+                <div>
+                    <img src="images/ear.jpeg" alt="ودانات أرنوب متحركة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">ودانات فرو أرنب</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- البرمجة والربط -->
     <script>
         const whatsappNumber = "201099771745"; 
 
@@ -286,7 +286,6 @@
             }
         });
 
-        // دالة التفاعل مع استطلاع الرأي
         function handleVote(button, type) {
             const parent = button.parentElement;
             const msgEl = parent.nextElementSibling;
@@ -296,10 +295,10 @@
             
             if (type === 'yes') {
                 msgEl.innerText = "شكراً لكم! يسعدنا أنها نالت إعجابكم ✨";
-                msgEl.className = "vote-msg text-xs font-bold mt-2 text-green-600";
+                msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-green-600";
             } else {
-                msgEl.innerText = "شكراً لمشاركتكم، سنوفر خيارات أفضل دائماً 🤍";
-                msgEl.className = "vote-msg text-xs font-bold mt-2 text-gray-500";
+                msgEl.innerText = "شكراً لمشاركتكم، سنوفر الأفضل دائماً 🤍";
+                msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-gray-500";
             }
         }
 
