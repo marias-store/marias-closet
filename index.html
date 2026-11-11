@@ -101,6 +101,7 @@
 
                 <div id="freeShippingNotice" class="mb-4 p-2.5 bg-pink-50 rounded-xl border border-pink-100 text-xs text-center text-pink-700 font-medium hidden"></div>
 
+                <!-- طريقة الاستلام والتوصيل -->
                 <div class="mb-4 border-t pt-4">
                     <label class="block font-semibold text-gray-700 mb-2 text-sm">طريقة الاستلام والتوصيل:</label>
                     <div class="space-y-2 text-sm">
@@ -121,6 +122,28 @@
                     </div>
                 </div>
 
+                <!-- طريقة الدفع الجديدة (فودافون كاش) -->
+                <div class="mb-4 border-t pt-4">
+                    <label class="block font-semibold text-gray-700 mb-2 text-sm">طريقة الدفع:</label>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center justify-between p-2.5 rounded-lg border border-gray-200 hover:bg-pink-50 transition cursor-pointer">
+                            <div class="flex items-center gap-2">
+                                <input type="radio" name="paymentType" value="cash" checked class="accent-pink-600">
+                                <span class="font-medium text-gray-700">الدفع عند الاستلام</span>
+                            </div>
+                            <span class="text-xs font-bold text-gray-600">💵</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2.5 rounded-lg border border-gray-200 hover:bg-pink-50 transition cursor-pointer">
+                            <div class="flex items-center gap-2">
+                                <input type="radio" name="paymentType" value="vodafone" class="accent-pink-600">
+                                <span class="font-medium text-gray-700">فودافون كاش (01099771745)</span>
+                            </div>
+                            <span class="text-xs font-bold text-red-600">📱</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- بيانات التوصيل -->
                 <div class="mb-4 border-t pt-4 space-y-3">
                     <label class="block font-semibold text-gray-700 text-sm">بيانات التوصيل الخاصة بك:</label>
                     <input type="text" id="clientName" placeholder="اسمك الكريم" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500">
@@ -150,17 +173,14 @@
         </aside>
     </main>
 
-    <!-- قسم استطلاع رأي المنتجات القادمة (أصبح الآن في الأسفل وبحجم أنيق وصغير) -->
+    <!-- قسم استطلاع رأي المنتجات القادمة -->
     <section class="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-6 mb-8 border border-pink-200">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-pink-700 mb-1">✨ شاركونا رأيكم في منتجاتنا القادمة ✨</h2>
             <p class="text-gray-600 text-sm">لو توفرت هذه القطع في المتجر قريباً، هل ترغبون بشرائها؟</p>
         </div>
 
-        <!-- شبكة عرض الصور الـ 5 (أصغر حجماً وبشكل مرتب) -->
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            
-            <!-- قطعة 1 -->
             <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
                 <div>
                     <img src="images/banda.jpeg" alt="بندانات شعر ناعمة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
@@ -169,13 +189,12 @@
                 <div>
                     <div class="poll-buttons flex justify-center gap-1.5">
                         <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-gray-200 transition">لا 👎</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
                     </div>
                     <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
                 </div>
             </div>
 
-            <!-- قطعة 2 -->
             <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
                 <div>
                     <img src="images/banda0.jpeg" alt="طوق شعر الباندا" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
@@ -184,13 +203,12 @@
                 <div>
                     <div class="poll-buttons flex justify-center gap-1.5">
                         <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-gray-200 transition">لا 👎</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
                     </div>
                     <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
                 </div>
             </div>
 
-            <!-- قطعة 3 -->
             <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
                 <div>
                     <img src="images/book.jpeg" alt="محفظة صغيرة ممتعة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
@@ -205,7 +223,6 @@
                 </div>
             </div>
 
-            <!-- قطعة 4 -->
             <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
                 <div>
                     <img src="images/book0.jpeg" alt="محفظة جلدية مبطنة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
@@ -220,7 +237,6 @@
                 </div>
             </div>
 
-            <!-- قطعة 5 -->
             <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center sm:col-span-1 col-span-2">
                 <div>
                     <img src="images/ear.jpeg" alt="ودانات أرنوب متحركة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition" title="انقر للتكبير">
@@ -234,7 +250,6 @@
                     <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -246,7 +261,7 @@
             { 
                 id: 1, 
                 name: "شال فرو برجندي فاخر", 
-                price: 400, 
+                price: 399, 
                 colors: [
                     { name: "برجندي", hex: "#701a75", image: "images/scarf.jpg", stock: 5 }
                 ] 
@@ -274,6 +289,38 @@
                     { name: "بيربل", hex: "#c084fc", image: "images/roller-purple.jpg", stock: 6 },
                     { name: "أسود", hex: "#1f2937", image: "images/roller-black.jpg", stock: 3 }
                 ] 
+            },
+            {
+                id: 4,
+                name: "بلوزة تريكو هايكول مضلعة",
+                price: 350, 
+                colors: [
+                    { name: "بيج", hex: "#d2b48c", image: "images/bais-beig.jpg", stock: 2 },
+                    { name: "أسود", hex: "#1f2937", image: "images/bais-black.jpg", stock: 1 },
+                    { name: "رمادي فاتح", hex: "#d1d5db", image: "images/bais-lightgray.jpg", stock: 1 },
+                    { name: "نبيتي", hex: "#7f1d1d", image: "images/bais-nbiti.jpeg", stock: 1 },
+                    { name: "أوف وايت", hex: "#fef3c7", image: "images/bais-offwhite.jpeg", stock: 1 }
+                ]
+            },
+            {
+                id: 5,
+                name: "بلوزة ناعمة نصف رقبة",
+                price: 320, 
+                colors: [
+                    { name: "أسود", hex: "#1f2937", image: "images/bloz-black.jpeg", stock: 1 },
+                    { name: "زيتي", hex: "#14532d", image: "images/bloz-green.jpeg", stock: 1 },
+                    { name: "كشمير", hex: "#e892a0", image: "images/bloz-kashmir.jpeg", stock: 1 },
+                    { name: "موف", hex: "#c084fc", image: "images/bloz-mowv.jpeg", stock: 1 },
+                    { name: "نبيتي", hex: "#7f1d1d", image: "images/bloz-nbiti.jpeg", stock: 1 }
+                ]
+            },
+            {
+                id: 6,
+                name: "دفاية شتوية قطعتين (بجامة سوداء)",
+                price: 450, 
+                colors: [
+                    { name: "أسود", hex: "#1f2937", image: "images/bloz-black.jpeg", stock: 6 }
+                ]
             }
         ];
 
@@ -510,6 +557,8 @@
             }
 
             const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+            const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
+            
             let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             let deliveryFee = (deliveryType === 'delivery' && subtotal < 600) ? 75 : 0;
             
@@ -520,11 +569,14 @@
                 deliveryText = 'استلام من المقر (التجمع الأول - المجاورة 6 - فيلا 250)';
             }
 
-            message = "🌸 *طلب جديد من خزانة ماريا الصغيرة* 🎀\n\n";
+            let paymentText = (paymentType === 'vodafone') ? 'فودافون كاش (01099771745)' : 'الدفع عند الاستلام';
+
+            let message = "🌸 *طلب جديد من خزانة ماريا الصغيرة* 🎀\n\n";
             message += `👤 *اسم العميل:* ${name}\n`;
             message += `📞 *رقم الهاتف:* ${phone}\n`;
             message += `📍 *العنوان:* ${address}\n`;
-            message += `🚚 *طريقة الاستلام:* ${deliveryText}\n\n`;
+            message += `🚚 *طريقة الاستلام:* ${deliveryText}\n`;
+            message += `💳 *طريقة الدفع:* ${paymentText}\n\n`;
             message += `🛒 *المنتجات المطلوبة:*\n`;
 
             cart.forEach(item => {
