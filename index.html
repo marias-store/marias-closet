@@ -481,7 +481,152 @@
             updateCartUI();
         }
 
-<ElicitationsGroup message="بعد لصق الكود وتحديث المتصفح (Ctrl + F5):">
-  <Elicitation label="ظهرت المنتجات وتعمل بنجاح" query="الحمد لله ظهرت المنتجات وتعمل بشكل ممتاز"/>
-  <Elicitation label="أريد التأكد من خطوة أخرى" query="هل هناك أي ملاحظة أخرى يجب أن أتأكد منها؟"/>
-</ElicitationsGroup>
+        function changeQuantity(cartId, delta) {
+            const cartItem = cart.find(item => item.cartId === cartId);
+            if (cartItem) {
+                const [pId, cName] = cartId.split('-');
+                const product = products.find(p => p.id == pId);
+                const colorObj = product.colors.find(c => c.name === cName);
+
+                if (delta > 0 && cartItem.quantity + 1 > colorObj.stock) {
+                    alert(`عذراً، الكمية المتوفرة في المخزون هي ${colorObj.stock} قطع فقط.`);
+                    return;
+                }
+
+                cartItem.quantity += delta;
+                if (cartItem.quantity <= 0) {
+                    cart = cart.filter(item => item.cartId !== cartId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartContainer = document.getElementById("cartItems");
+            const subtotalEl = document.getElementById("subtotalPrice");
+            const cartBadge = document.getElementById("cartBadge");
+            
+            let totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.innerText = totalCount;
+            
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `<p class="text-gray-400 text-center py-4">🌸 السلة فارغة! يرجى اختيار بعض المنتجات لدعم ماريا 🌸</p>`;
+                subtotalEl.innerText = "0 ج.م";
+                updateTotal();
+                return;
+            }
+
+            cartContainer.innerHTML = "";
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                cartContainer.innerHTML += `
+                    <div class="flex justify-between items-center text-sm border-b pb-2">
+                        <div class="flex-1">
+                            <span class="font-semibold text-gray-800 block">${item.name}</span>
+                            <span class="text-xs text-gray-500 block">اللون: ${item.color}</span>
+                            <span class="text-xs text-pink-600 font-bold">${item.price * item.quantity} ج.م</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-pink-50 rounded-lg p-1 border border-pink-100">
+                            <button onclick="changeQuantity('${item.cartId}', -1)" class="w-5 h-5 rounded bg-white text-pink-600 font-bold flex items-center justify-center hover:bg-pink-100 shadow-sm">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.cartId}', 1)" class="w-5 h-5 rounded bg-white text-pink-600 font-bold flex items-center justify-center hover:bg-pink-100 shadow-sm">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            subtotalEl.innerText = subtotal + " ج.م";
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+            const freeNotice = document.getElementById("freeShippingNotice");
+            const deliveryLabelFee = document.getElementById("deliveryLabelFee");
+            
+            let deliveryFee = 0;
+
+            if (deliveryType === 'delivery') {
+                if (subtotal >= 600) {
+                    deliveryFee = 0;
+                    freeNotice.classList.remove("hidden");
+                    freeNotice.innerHTML = "🎉 مبروك! لقد حصلت على <b>توصيل مجاني</b> لأن إجمالي طلبك 600 جنيه أو أكثر.";
+                    deliveryLabelFee.innerText = "مجاناً 🎁";
+                    deliveryLabelFee.className = "text-xs font-bold text-green-600";
+                } else {
+                    deliveryFee = cart.length > 0 ? 75 : 0;
+                    freeNotice.classList.remove("hidden");
+                    let needed = 600 - subtotal;
+                    freeNotice.innerHTML = `💡 أضف منتجات بقيمة <b>${needed} ج.م</b> إضافية لتحصل على <b>توصيل مجاني</b>!`;
+                    deliveryLabelFee.innerText = "75 ج.م";
+                    deliveryLabelFee.className = "text-xs font-bold text-pink-600";
+                }
+            } else {
+                deliveryFee = 0;
+                freeNotice.classList.add("hidden");
+            }
+
+            document.getElementById("deliveryPrice").innerText = deliveryFee + " ج.م";
+            let finalTotal = subtotal + deliveryFee;
+            document.getElementById("finalTotal").innerText = finalTotal + " ج.م";
+        }
+
+        function sendOrderViaWhatsApp() {
+            if (cart.length === 0) {
+                alert("السلة فارغة! يرجى اختيار بعض المنتجات أولاً لدعم ماريا ✨");
+                return;
+            }
+
+            const name = document.getElementById("clientName").value.trim();
+            const phone = document.getElementById("clientPhone").value.trim();
+            const address = document.getElementById("clientAddress").value.trim();
+
+            if (!name || !phone || !address) {
+                alert("يرجى تعبئة (الاسم، رقم الهاتف، وعنوان التوصيل) قبل إرسال الطلب.");
+                return;
+            }
+
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+            const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
+            
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let deliveryFee = (deliveryType === 'delivery' && subtotal < 600) ? 75 : 0;
+            
+            let deliveryText = "";
+            if (deliveryType === 'delivery') {
+                deliveryText = subtotal >= 600 ? 'توصيل للمنزل (مجاني 🎉)' : 'توصيل للمنزل (75 ج.م)';
+            } else {
+                deliveryText = 'استلام من المقر (التجمع الأول - المجاورة 6 - فيلا 250)';
+            }
+
+            let paymentText = (paymentType === 'vodafone') ? 'فودافون كاش (01099771745)' : 'الدفع عند الاستلام';
+
+            let message = "🌸 *طلب جديد من خزانة ماريا الصغيرة* 🎀\n\n";
+            message += `👤 *اسم العميل:* ${name}\n`;
+            message += `📞 *رقم الهاتف:* ${phone}\n`;
+            message += `📍 *العنوان:* ${address}\n`;
+            message += `🚚 *طريقة الاستلام:* ${deliveryText}\n`;
+            message += `💳 *طريقة الدفع:* ${paymentText}\n\n";
+            message += `🛒 *المنتجات المطلوبة:*\n`;
+
+            cart.forEach(item => {
+                message += `• ${item.name} (${item.color}) | الكمية: ${item.quantity} | السعر: ${item.price * item.quantity} ج.م\n`;
+            });
+
+            let finalTotal = subtotal + deliveryFee;
+
+            message += `\n📦 *مجموع المنتجات:* ${subtotal} ج.م`;
+            message += `\n🚚 *رسوم التوصيل:* ${deliveryFee} ج.م`;
+            message += `\n💰 *الإجمالي النهائي:* ${finalTotal} ج.م\n\n✨ بانتظار تجهيز الطلب بحب لماريا ودعم مشروعها الصغير! 🤍`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
+        }
+
+        displayProducts();
+    </script>
+</body>
+</html>
