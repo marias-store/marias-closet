@@ -80,6 +80,7 @@
                 <span class="text-xs bg-pink-100 text-pink-700 font-bold px-3 py-1 rounded-full">توصيل مجاني للطلبات فوق 600 ج.م</span>
             </div>
             
+            <div id="loadingStockMsg" class="text-center text-xs text-pink-600 font-semibold mb-3 hidden">⏳ جاري تحديث المخزون المباشر...</div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="productsGrid"></div>
         </section>
 
@@ -103,14 +104,14 @@
                     <div class="space-y-2 text-sm">
                         <label class="flex items-center justify-between p-2.5 rounded-lg border border-gray-200 hover:bg-pink-50 transition cursor-pointer">
                             <div class="flex items-center gap-2">
-                                <input type="radio" name="deliveryType" value="delivery" checked onchange="updateTotal()" class="accent-pink-600">
+                                <input type="radio" name="deliveryType" value="delivery" checked onchange="handleDeliveryChange()" class="accent-pink-600">
                                 <span class="font-medium text-gray-700">توصيل للمنزل</span>
                             </div>
                             <span id="deliveryLabelFee" class="text-xs font-bold text-pink-600">75 ج.م</span>
                         </label>
                         <label class="flex items-center justify-between p-2.5 rounded-lg border border-gray-200 hover:bg-pink-50 transition cursor-pointer">
                             <div class="flex items-center gap-2">
-                                <input type="radio" name="deliveryType" value="pickup" onchange="updateTotal()" class="accent-pink-600">
+                                <input type="radio" name="deliveryType" value="pickup" onchange="handleDeliveryChange()" class="accent-pink-600">
                                 <span class="font-medium text-gray-700">استلام من المقر (التجمع الأول)</span>
                             </div>
                             <span class="text-xs font-bold text-green-600">مجاناً</span>
@@ -144,7 +145,10 @@
                     <label class="block font-semibold text-gray-700 text-sm">بيانات التوصيل الخاصة بك:</label>
                     <input type="text" id="clientName" placeholder="اسمك الكريم" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500">
                     <input type="tel" id="clientPhone" placeholder="رقم الهاتف للتواصل" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500">
-                    <textarea id="clientAddress" placeholder="عنوان التوصيل بالتفصيل (المدينة، الشارع، رقم الحارة/العمارة)" rows="2" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500"></textarea>
+                    <!-- يختفي هذا الحقل تلقائياً عند اختيار الاستلام من المقر -->
+                    <div id="addressContainer">
+                        <textarea id="clientAddress" placeholder="عنوان التوصيل بالتفصيل (المدينة، الشارع، رقم الحارة/العمارة)" rows="2" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500"></textarea>
+                    </div>
                 </div>
 
                 <div class="border-t pt-4 space-y-2 mb-6 text-sm">
@@ -252,6 +256,9 @@
     <!-- البرمجة والربط (JavaScript) -->
     <script>
         const whatsappNumber = "201099771745"; 
+
+        // 👇 الصقي رابط تطبيق الويب (Web App URL) من Google Sheets هنا بين علامتي التنصيص 👇
+        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzw53T1pFsw8zL3iJLBhliwfeCKzNcwx88jZgmR4Gnb5Limg6hYnSSqFJDcAjlV7IaqcQ/exec";
 
         const products = [
             { 
@@ -370,6 +377,47 @@
             }
         });
 
+        // جلب المخزون المباشر من Google Sheets عند فتح الموقع
+        async function fetchStockFromSheet() {
+            if (!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL === "ضعي_رابط_جوجل_شيت_هنا") return;
+            
+            const loadingMsg = document.getElementById("loadingStockMsg");
+            loadingMsg.classList.remove("hidden");
+
+            try {
+                const response = await fetch(GOOGLE_SHEET_URL);
+                const sheetData = await response.json();
+                
+                sheetData.forEach(row => {
+                    const prod = products.find(p => p.id === Number(row.productId));
+                    if (prod) {
+                        const col = prod.colors.find(c => c.name.trim() === String(row.color).trim());
+                        if (col) {
+                            col.stock = Number(row.stock);
+                        }
+                    }
+                });
+                displayProducts();
+            } catch (err) {
+                console.error("خطأ في جلب المخزون من Google Sheets:", err);
+            } finally {
+                loadingMsg.classList.add("hidden");
+            }
+        }
+
+        // إظهار أو إخفاء العنوان بناءً على طريقة الاستلام
+        function handleDeliveryChange() {
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+            const addressContainer = document.getElementById("addressContainer");
+            
+            if (deliveryType === 'pickup') {
+                addressContainer.classList.add("hidden");
+            } else {
+                addressContainer.classList.remove("hidden");
+            }
+            updateTotal();
+        }
+
         function handleVote(button, type) {
             const parent = button.parentElement;
             const msgEl = parent.nextElementSibling;
@@ -413,15 +461,20 @@
             products.forEach(product => {
                 let activeColorObj = product.colors.find(c => c.name === selectedColors[product.id]) || product.colors[0];
                 let displayImg = currentImages[product.id] || activeColorObj.image;
-                let availableStock = activeColorObj.stock;
+                
+                let cartItem = cart.find(item => item.id === product.id && item.color === activeColorObj.name);
+                let qtyInCart = cartItem ? cartItem.quantity : 0;
+                let availableStock = activeColorObj.stock - qtyInCart;
 
-                let colorsHtml = `<div class="flex items-center gap-2 mb-3">
+                let colorsHtml = `<div class="flex items-center gap-2 mb-3 flex-wrap">
                     <span class="text-xs text-gray-500 font-medium">اللون:</span>
-                    <div class="flex items-center gap-1.5">`;
+                    <div class="flex items-center gap-1.5 flex-wrap">`;
                 
                 product.colors.forEach(c => {
                     let isSelected = (selectedColors[product.id] === c.name && displayImg === c.image) ? 'selected' : '';
-                    colorsHtml += `<span class="color-dot ${isSelected}" style="background-color: ${c.hex};" title="${c.name} (متوفر: ${c.stock})" onclick="selectColor(${product.id}, '${c.name}', '${c.image}')"></span>`;
+                    let cCartItem = cart.find(item => item.id === product.id && item.color === c.name);
+                    let cRemaining = c.stock - (cCartItem ? cCartItem.quantity : 0);
+                    colorsHtml += `<span class="color-dot ${isSelected}" style="background-color: ${c.hex};" title="${c.name} (متوفر: ${cRemaining})" onclick="selectColor(${product.id}, '${c.name}', '${c.image}')"></span>`;
                 });
                 
                 colorsHtml += `</div></div>`;
@@ -435,6 +488,14 @@
                     `;
                 }
 
+                let stockBadgeHtml = availableStock > 0 
+                    ? `<span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">المتوفر: ${availableStock} قطع</span>`
+                    : `<span class="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold">نفذت الكمية ❌</span>`;
+
+                let buttonHtml = availableStock > 0
+                    ? `<button onclick="addToCart(${product.id})" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm py-2 px-3 rounded-lg font-medium transition">أضف للسلة 🛍️</button>`
+                    : `<button disabled class="w-full bg-gray-300 text-gray-500 text-sm py-2 px-3 rounded-lg font-medium cursor-not-allowed">غير متوفر حالياً</button>`;
+
                 grid.innerHTML += `
                     <div class="bg-white rounded-xl shadow-sm p-4 border border-pink-100 flex flex-col justify-between hover:shadow-md transition">
                         <div>
@@ -443,13 +504,11 @@
                             <h3 class="font-bold text-gray-800 text-sm md:text-base mb-1">${product.name}</h3>
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-pink-600 font-bold text-base">${product.price} ج.م</span>
-                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">المتوفر: ${availableStock} قطع</span>
+                                ${stockBadgeHtml}
                             </div>
                             ${colorsHtml}
                         </div>
-                        <button onclick="addToCart(${product.id})" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm py-2 px-3 rounded-lg font-medium transition">
-                            أضف للسلة 🛍️
-                        </button>
+                        ${buttonHtml}
                     </div>
                 `;
             });
@@ -479,6 +538,7 @@
                 });
             }
             updateCartUI();
+            displayProducts();
         }
 
         function changeQuantity(cartId, delta) {
@@ -499,6 +559,7 @@
                 }
             }
             updateCartUI();
+            displayProducts();
         }
 
         function updateCartUI() {
@@ -580,17 +641,21 @@
                 return;
             }
 
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+            const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
+
             const name = document.getElementById("clientName").value.trim();
             const phone = document.getElementById("clientPhone").value.trim();
             const address = document.getElementById("clientAddress").value.trim();
 
-            if (!name || !phone || !address) {
-                alert("يرجى تعبئة (الاسم، رقم الهاتف، وعنوان التوصيل) قبل إرسال الطلب.");
+            if (!name || !phone || (deliveryType === 'delivery' && !address)) {
+                if (deliveryType === 'delivery') {
+                    alert("يرجى تعبئة (الاسم، رقم الهاتف، وعنوان التوصيل) قبل إرسال الطلب.");
+                } else {
+                    alert("يرجى تعبئة (الاسم ورقم الهاتف) قبل إرسال الطلب.");
+                }
                 return;
             }
-
-            const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
-            const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
             
             let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             let deliveryFee = (deliveryType === 'delivery' && subtotal < 600) ? 75 : 0;
@@ -607,13 +672,26 @@
             let message = "🌸 *طلب جديد من خزانة ماريا الصغيرة* 🎀\n\n";
             message += `👤 *اسم العميل:* ${name}\n`;
             message += `📞 *رقم الهاتف:* ${phone}\n`;
-            message += `📍 *العنوان:* ${address}\n`;
+            if (deliveryType === 'delivery') {
+                message += `📍 *العنوان:* ${address}\n`;
+            }
             message += `🚚 *طريقة الاستلام:* ${deliveryText}\n`;
             message += `💳 *طريقة الدفع:* ${paymentText}\n\n`;
             message += `🛒 *المنتجات المطلوبة:*\n`;
 
+            const orderPayload = [];
+
             cart.forEach(item => {
                 message += `• ${item.name} (${item.color}) | الكمية: ${item.quantity} | السعر: ${item.price * item.quantity} ج.م\n`;
+                orderPayload.push({ id: item.id, color: item.color, quantity: item.quantity });
+                
+                let prod = products.find(p => p.id === item.id);
+                if (prod) {
+                    let col = prod.colors.find(c => c.name === item.color);
+                    if (col) {
+                        col.stock = Math.max(0, col.stock - item.quantity);
+                    }
+                }
             });
 
             let finalTotal = subtotal + deliveryFee;
@@ -622,11 +700,25 @@
             message += `\n🚚 *رسوم التوصيل:* ${deliveryFee} ج.م`;
             message += `\n💰 *الإجمالي النهائي:* ${finalTotal} ج.م\n\n✨ ستبدأ ماريا بتجهيز طلبكم بكل حب 🌸 لأنكم جزء من حلمي الصغير🤍`;
 
+            if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL !== "ضعي_رابط_جوجل_شيت_هنا") {
+                fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(orderPayload)
+                }).catch(err => console.error("خطأ في تحديث الشيت:", err));
+            }
+
+            cart = [];
+            updateCartUI();
+            displayProducts();
+
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
         }
 
         displayProducts();
+        fetchStockFromSheet();
     </script>
 </body>
 </html>
