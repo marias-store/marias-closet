@@ -169,6 +169,86 @@
         </aside>
     </main>
 
+    <!-- قسم الاستطلاع لآراء العملاء -->
+    <section class="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-6 mb-8 border border-pink-200">
+        <div class="text-center mb-6">
+            <h2 class="text-2xl font-bold text-pink-700 mb-1">✨ شاركونا رأيكم في منتجاتنا القادمة ✨</h2>
+            <p class="text-gray-600 text-sm">لو توفرت هذه القطع في المتجر قريباً، هل ترغبون بشرائها؟</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
+                <div>
+                    <img src="images/banda.jpeg" alt="بندانات شعر ناعمة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">بندانات شعر بناتي</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
+                <div>
+                    <img src="images/banda0.jpeg" alt="طوق شعر الباندا" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">طوق الباندا لطيف</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
+                <div>
+                    <img src="images/book.jpeg" alt="محفظة صغيرة ممتعة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">محفظة صغيرة ناعمة</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center">
+                <div>
+                    <img src="images/book0.jpeg" alt="محفظة جلدية مبطنة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">محفظة جلد أنيقة</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+
+            <div class="bg-pink-50/40 rounded-xl p-2.5 border border-pink-100 flex flex-col justify-between text-center sm:col-span-1 col-span-2">
+                <div>
+                    <img src="images/ear.jpeg" alt="ودانات أرنوب متحركة" onclick="openLightbox(this.src)" class="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:opacity-90 transition">
+                    <h3 class="font-bold text-gray-800 text-xs mb-2">ودانات فرو أرنب</h3>
+                </div>
+                <div>
+                    <div class="poll-buttons flex justify-center gap-1.5">
+                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                    </div>
+                    <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- البرمجة والربط (JavaScript) -->
     <script>
         const whatsappNumber = "201099771745"; 
@@ -176,6 +256,14 @@
         const products = [
             { 
                 id: 1, 
+                name: "شال فرو برجندي فاخر", 
+                price: 399, 
+                colors: [
+                    { name: "برجندي", hex: "#701a75", image: "images/scarf.jpg", stock: 5 }
+                ] 
+            },
+            { 
+                id: 2, 
                 name: "شال فرو ناعم وجهين فاخر", 
                 price: 399, 
                 colors: [
@@ -184,11 +272,12 @@
                     { name: "كشمير", hex: "#e892a0", image: "images/shal-kashmir.jpeg", stock: 1 },
                     { name: "كحلي", hex: "#1e3a8a", image: "images/shal-kohly.jpeg", stock: 1 },
                     { name: "نبيتي", hex: "#7f1d1d", image: "images/shal-nbiti.jpeg", stock: 1 },
+                     { name: "أبيض", hex: "#7f1d1d", image: "images/shal-white.jpeg", stock: 1 },
                     { name: "أوف وايت", hex: "#fef3c7", image: "images/shal-offwhite.jpeg", stock: 1 }
                 ] 
             },
             { 
-                id: 2, 
+                id: 3, 
                 name: "ودانات فرو ناعمة", 
                 price: 250, 
                 colors: [
@@ -199,7 +288,7 @@
                 ] 
             },
             { 
-                id: 3, 
+                id: 4, 
                 name: "إسفنجة تصفيف الشعر ويفي بدون حرارة", 
                 price: 175, 
                 usageImage: "images/roller-usage.jpg",
@@ -213,8 +302,8 @@
             },
             // موديل الكنزات الأول (هايكول مضلع - 6 ألوان)
             {
-                id: 4,
-                name: "بلوزة تريكو هايكول مضلعة",
+                id: 5,
+                name: "بيزك عجينة مستوردة ون سايز",
                 price: 350, 
                 colors: [
                     { name: "بيج", hex: "#d2b48c", image: "images/bais-beig.jpg", stock: 2 },
@@ -222,13 +311,13 @@
                     { name: "رمادي فاتح", hex: "#d1d5db", image: "images/bais-lightgray.jpg", stock: 1 },
                     { name: "نبيتي", hex: "#7f1d1d", image: "images/bais-nbiti.jpeg", stock: 1 },
                     { name: "أوف وايت", hex: "#fef3c7", image: "images/bais-offwhite.jpeg", stock: 1 },
-                    { name: "أخضر/زيتي", hex: "#14532d", image: "images/bloz-green.jpeg", stock: 1 }
+                    { name: "أخضر/زيتي", hex: "#14532d", image: "images/bais-green.jpeg", stock: 1 }
                 ]
             },
             // موديل الكنزات الثاني (نصف رقبة - 6 ألوان)
             {
-                id: 5,
-                name: "بلوزة ناعمة نصف رقبة",
+                id: 6,
+                name: "بيزك عجينة صباغ ون سايز",
                 price: 320, 
                 colors: [
                     { name: "أسود", hex: "#1f2937", image: "images/bloz-black.jpeg", stock: 1 },
@@ -239,10 +328,10 @@
                     { name: "أبيض", hex: "#ffffff", image: "images/bloz-white.jpeg", stock: 1 }
                 ]
             },
-            // موديل الكنزات الثالث (موديل كنزات إضافي - 6 ألوان)
+            // موديل الكنزات الثالث (6 ألوان)
             {
-                id: 6,
-                name: "موديل كنزات شتوية أنيقة",
+                id: 7,
+                name: "بيزك شي ان ون سايز ",
                 price: 360, 
                 colors: [
                     { name: "أسود", hex: "#1f2937", image: "images/hav-black.jpeg", stock: 1 },
@@ -253,15 +342,26 @@
                     { name: "أساسي", hex: "#4b5563", image: "images/hav.jpeg", stock: 1 }
                 ]
             },
-            // الموديل الرابع: الدفاية
+            // الموديل الرابع: الدفاية السوداء قطعتين
             {
-                id: 7,
-                name: "دفاية شتوية قطعتين (بجامة سوداء)",
+                id: 8,
+                name: "طقم دفاية قطعتين مبطن ون سايز",
                 price: 450, 
                 colors: [
-                    { name: "أسود", hex: "#1f2937", image: "images/bloz-black.jpeg", stock: 6 }
+                    { name: "أسود", hex: "#1f2937", image: "images/warm.jpeg", stock: 6 }
                 ]
             }
+            //كارديجان 3 الوان
+            { 
+                id: 9, 
+                name: "كارديجان تريكو طويل أنيق", 
+                price: 420, 
+                colors: [
+                    { name: "بيج", hex: "#d2b48c", image: "images/carden-beig.jpg", stock: 1 },
+                    { name: "رمادي", hex: "#9ca3af", image: "images/carden-gray.jpg", stock: 1 },
+                    { name: "نبيتي", hex: "#7f1d1d", image: "images/carden-nbiti.jpg", stock: 1 }
+                ] 
+            },
         ];
 
         let cart = [];
@@ -274,6 +374,20 @@
                 currentImages[p.id] = p.colors[0].image;
             }
         });
+
+        function handleVote(button, type) {
+            const parent = button.parentElement;
+            const msgEl = parent.nextElementSibling;
+            parent.classList.add('hidden');
+            msgEl.classList.remove('hidden');
+            if (type === 'yes') {
+                msgEl.innerText = "شكراً لكم! يسعدنا أنها نالت إعجابكم ✨";
+                msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-green-600";
+            } else {
+                msgEl.innerText = "شكراً لمشاركتكم، سنوفر الأفضل دائماً 🤍";
+                msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-gray-500";
+            }
+        }
 
         function openLightbox(imgSrc) {
             const modal = document.getElementById('lightboxModal');
