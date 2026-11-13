@@ -4,7 +4,7 @@
     <meta name="google-site-verification" content="EVDy550SMQBUjEyt3Cz1l8D3lAMMag7nBRstb1Zik_c" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خزانة ماريا الصغيرة 🎀 - متجر الهدايا والإكسسوارات</title>
+    <title>خزانة ماريا الصغيرة 🎀 - متجر الهدايا والإكسسوارات والملابس</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,6 @@
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- نافذة تكبير الصورة المنبثقة -->
     <div id="lightboxModal" onclick="closeLightbox()">
         <div class="relative max-w-3xl w-full bg-white p-4 rounded-2xl text-center" onclick="event.stopPropagation()">
             <button onclick="closeLightbox()" class="absolute top-2 left-2 bg-pink-600 text-white w-8 h-8 rounded-full font-bold text-lg flex items-center justify-center hover:bg-pink-700 transition">×</button>
@@ -55,7 +54,6 @@
         </div>
     </div>
 
-    <!-- الهيدر والترحيب -->
     <header class="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-6 mb-8 text-center border border-pink-200">
         <h1 class="text-3xl md:text-4xl font-bold text-pink-700 mb-2">خَزَانَةُ مَارِيَا الصَّغِيرَةُ 🎀</h1>
         <p class="text-pink-900 font-medium text-lg mb-2">✨ تشكيلة ناعمة ومستلزماتُ مختارةٌ بعناية لِتُلامِسَ قُلوبَكُم ✨</p>
@@ -70,21 +68,17 @@
         </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
     <main class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 mb-12">
-        
-        <!-- قسم المنتجات -->
         <section class="lg:w-2/3 w-full">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-2xl font-bold text-gray-800 border-r-4 border-pink-500 pr-3">قائمة المنتجات 🛍️</h2>
                 <span class="text-xs bg-pink-100 text-pink-700 font-bold px-3 py-1 rounded-full">توصيل مجاني للطلبات فوق 600 ج.م</span>
             </div>
             
-            <div id="loadingStockMsg" class="text-center text-xs text-pink-600 font-semibold mb-3 hidden">⏳ جاري تحديث المخزون المباشر...</div>
+            <div id="loadingStockMsg" class="text-center text-xs text-pink-600 font-semibold mb-3 hidden">⏳ جاري تحديث البيانات والطلبات...</div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="productsGrid"></div>
         </section>
 
-        <!-- سلة المشتريات -->
         <aside class="lg:w-1/3 w-full">
             <div class="bg-white rounded-2xl shadow-md p-6 sticky top-4 border border-pink-200">
                 <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2 flex justify-between items-center">
@@ -98,7 +92,6 @@
 
                 <div id="freeShippingNotice" class="mb-4 p-2.5 bg-pink-50 rounded-xl border border-pink-100 text-xs text-center text-pink-700 font-medium hidden"></div>
 
-                <!-- طريقة الاستلام -->
                 <div class="mb-4 border-t pt-4">
                     <label class="block font-semibold text-gray-700 mb-2 text-sm">طريقة الاستلام والتوصيل:</label>
                     <div class="space-y-2 text-sm">
@@ -119,7 +112,6 @@
                     </div>
                 </div>
 
-                <!-- طريقة الدفع -->
                 <div class="mb-4 border-t pt-4">
                     <label class="block font-semibold text-gray-700 mb-2 text-sm">طريقة الدفع:</label>
                     <div class="space-y-2 text-sm">
@@ -140,12 +132,10 @@
                     </div>
                 </div>
 
-                <!-- بيانات التوصيل -->
                 <div class="mb-4 border-t pt-4 space-y-3">
                     <label class="block font-semibold text-gray-700 text-sm">بيانات التوصيل الخاصة بك:</label>
                     <input type="text" id="clientName" placeholder="اسمك الكريم" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500">
                     <input type="tel" id="clientPhone" placeholder="رقم الهاتف للتواصل" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500">
-                    <!-- يختفي هذا الحقل تلقائياً عند اختيار الاستلام من المقر -->
                     <div id="addressContainer">
                         <textarea id="clientAddress" placeholder="عنوان التوصيل بالتفصيل (المدينة، الشارع، رقم الحارة/العمارة)" rows="2" class="w-full text-sm p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-500"></textarea>
                     </div>
@@ -173,7 +163,6 @@
         </aside>
     </main>
 
-    <!-- قسم الاستطلاع لآراء العملاء -->
     <section class="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-6 mb-8 border border-pink-200">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-pink-700 mb-1">✨ شاركونا رأيكم في منتجاتنا القادمة ✨</h2>
@@ -188,8 +177,8 @@
                 </div>
                 <div>
                     <div class="poll-buttons flex justify-center gap-1.5">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                        <button onclick="handleVote(this, 'بندانات شعر بناتي', 'نعم')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'بندانات شعر بناتي', 'لا')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
                     </div>
                     <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
                 </div>
@@ -202,8 +191,8 @@
                 </div>
                 <div>
                     <div class="poll-buttons flex justify-center gap-1.5">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                        <button onclick="handleVote(this, 'طوق الباندا لطيف', 'نعم')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'طوق الباندا لطيف', 'لا')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
                     </div>
                     <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
                 </div>
@@ -216,8 +205,8 @@
                 </div>
                 <div>
                     <div class="poll-buttons flex justify-center gap-1.5">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                        <button onclick="handleVote(this, 'محفظة صغيرة ناعمة', 'نعم')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'محفظة صغيرة ناعمة', 'لا')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
                     </div>
                     <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
                 </div>
@@ -230,8 +219,8 @@
                 </div>
                 <div>
                     <div class="poll-buttons flex justify-center gap-1.5">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                        <button onclick="handleVote(this, 'محفظة جلد أنيقة', 'نعم')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'محفظة جلد أنيقة', 'لا')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
                     </div>
                     <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
                 </div>
@@ -244,8 +233,8 @@
                 </div>
                 <div>
                     <div class="poll-buttons flex justify-center gap-1.5">
-                        <button onclick="handleVote(this, 'yes')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
-                        <button onclick="handleVote(this, 'no')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
+                        <button onclick="handleVote(this, 'ودانات فرو أرنب', 'نعم')" class="bg-green-100 text-green-700 hover:bg-green-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">نعم 👍</button>
+                        <button onclick="handleVote(this, 'ودانات فرو أرنب', 'لا')" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold text-[11px] py-1 px-2 rounded border border-green-200 transition">لا 👎</button>
                     </div>
                     <p class="vote-msg hidden text-[11px] font-bold mt-1 text-pink-600"></p>
                 </div>
@@ -253,117 +242,66 @@
         </div>
     </section>
 
-    <!-- البرمجة والربط (JavaScript) -->
     <script>
         const whatsappNumber = "201099771745"; 
-
-        // 👇 الصقي رابط تطبيق الويب (Web App URL) من Google Sheets هنا بين علامتي التنصيص 👇
-        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwkYRhyGzbysuDTLXUa9n4MryvExiTDUJTc0AlnLc6OaipMSlxtY4QcEN_8fS5mVCSo3A/exec";
+        const GOOGLE_SHEET_URL = "ضعي_رابط_جوجل_شيت_هنا";
 
         const products = [
-            { 
-                id: 1, 
-                name: "شال موهير برجندي فاخر", 
-                price: 399, 
-                colors: [
-                    { name: "برجندي", hex: "#701a75", image: "images/scarf.jpg", stock: 5 }
-                ] 
-            },
-            { 
-                id: 2, 
-                name: "شال فرو ناعم وجهين ", 
-                price: 150, 
-                colors: [
-                    { name: "بيج", hex: "#d2b48c", image: "images/shal-beig.jpeg", stock: 2 },
-                    { name: "أسود", hex: "#1f2937", image: "images/shal-black.jpeg", stock: 1 },
-                    { name: "كشمير", hex: "#e892a0", image: "images/shal-kashmir.jpeg", stock: 1 },
-                    { name: "كحلي", hex: "#1e3a8a", image: "images/shal-kohly.jpeg", stock: 1 },
-                    { name: "نبيتي", hex: "#7f1d1d", image: "images/shal-nbiti.jpeg", stock: 1 },
-                    { name: "أبيض", hex: "#ffffff", image: "images/shal-white.jpeg", stock: 1 },
-                    { name: "أوف وايت", hex: "#fef3c7", image: "images/shal-offwhite.jpeg", stock: 1 }
-                ] 
-            },
-            { 
-                id: 3, 
-                name: "ودانات فرو ناعمة", 
-                price: 250, 
-                colors: [
-                    { name: "كشمير", hex: "#e892a0", image: "images/earmuffs-pink.jpg", stock: 2 },
-                    { name: "أوف وايت", hex: "#fef3c7", image: "images/earmuffs-white.jpg", stock: 4 },
-                    { name: "كافيه", hex: "#d2b48c", image: "images/earmuffs-beige.jpg", stock: 4 },
-                    { name: "أسود", hex: "#1f2937", image: "images/earmuffs-black.jpg", stock: 2 }
-                ] 
-            },
-            { 
-                id: 4, 
-                name: "إسفنجة تصفيف الشعر ويفي بدون حرارة", 
-                price: 175, 
-                usageImage: "images/roller-usage.jpg",
-                colors: [
-                    { name: "بينك", hex: "#f472b6", image: "images/roller-pink.jpg", stock: 4 },
-                    { name: "بينك غامق", hex: "#db2777", image: "images/roller-darkpink.jpg", stock: 6 },
-                    { name: "أوف وايت", hex: "#fef3c7", image: "images/roller-white.jpg", stock: 4 },
-                    { name: "بيربل", hex: "#c084fc", image: "images/roller-purple.jpg", stock: 6 },
-                    { name: "أسود", hex: "#1f2937", image: "images/roller-black.jpg", stock: 3 }
-                ] 
-            },
-            {
-                id: 5,
-                name: "بيزك عجينة مستوردة ون سايز",
-                price: 350, 
-                colors: [
-                    { name: "بيج", hex: "#d2b48c", image: "images/bais-beig.jpg", stock: 2 },
-                    { name: "أسود", hex: "#1f2937", image: "images/bais-black.jpg", stock: 1 },
-                    { name: "رمادي فاتح", hex: "#d1d5db", image: "images/bais-lightgray.jpg", stock: 1 },
-                    { name: "نبيتي", hex: "#7f1d1d", image: "images/bais-nbiti.jpeg", stock: 1 },
-                    { name: "أوف وايت", hex: "#fef3c7", image: "images/bais-offwhite.jpeg", stock: 1 },
-                    { name: "أخضر/زيتي", hex: "#14532d", image: "images/bais-green.jpeg", stock: 1 }
-                ]
-            },
-            {
-                id: 6,
-                name: "بيزك عجينة صباغ ون سايز",
-                price: 300, 
-                colors: [
-                    { name: "أسود", hex: "#1f2937", image: "images/bloz-black.jpeg", stock: 1 },
-                    { name: "أخضر/زيتي", hex: "#14532d", image: "images/bloz-green.jpeg", stock: 1 },
-                    { name: "كشمير", hex: "#e892a0", image: "images/bloz-kashmir.jpeg", stock: 1 },
-                    { name: "موف", hex: "#c084fc", image: "images/bloz-mowv.jpeg", stock: 1 },
-                    { name: "نبيتي", hex: "#7f1d1d", image: "images/bloz-nbiti.jpeg", stock: 1 },
-                    { name: "أوف وايت", hex: "#fef3c7", image: "images/bloz-offwhite.jpeg", stock: 1 }
-                ]
-            },
-            {
-                id: 7,
-                name: "بيزك شي ان ون سايز",
-                price: 350, 
-                colors: [
-                    { name: "أسود", hex: "#1f2937", image: "images/hav-black.jpeg", stock: 1 },
-                    { name: "بني", hex: "#78350f", image: "images/hav-brown.jpeg", stock: 1 },
-                    { name: "رمادي فاتح", hex: "#d1d5db", image: "images/hav-lightgray.jpeg", stock: 1 },
-                    { name: "نبيتي", hex: "#7f1d1d", image: "images/hav-nbiti.jpeg", stock: 1 },
-                    { name: "أوف وايت", hex: "#fef3c7", image: "images/hav-offwhite.jpeg", stock: 1 },
-                    { name: "أساسي", hex: "#4b5563", image: "images/hav.jpeg", stock: 1 }
-                ]
-            },
-            {
-                id: 8,
-                name: "طقم دفاية قطعتين مبطن ون سايز",
-                price: 250, 
-                colors: [
-                    { name: "أسود", hex: "#1f2937", image: "images/warm.jpeg", stock: 6 }
-                ]
-            },
-            { 
-                id: 9, 
-                name: "كارديجان تريكو أنيق أوفر سايز", 
-                price: 500, 
-                colors: [
-                    { name: "بيج", hex: "#d2b48c", image: "images/carden-beig.jpg", stock: 1 },
-                    { name: "رمادي", hex: "#9ca3af", image: "images/carden-gray.jpg", stock: 1 },
-                    { name: "نبيتي", hex: "#7f1d1d", image: "images/carden-nbiti.jpg", stock: 1 }
-                ] 
-            }
+            { id: 1, name: "شال موهير برجندي فاخر", price: 399, colors: [{ name: "برجندي", hex: "#701a75", image: "images/scarf.jpg", stock: 5 }] },
+            { id: 2, name: "شال فرو ناعم وجهين", price: 150, colors: [
+                { name: "بيج", hex: "#d2b48c", image: "images/shal-beig.jpeg", stock: 2 },
+                { name: "أسود", hex: "#1f2937", image: "images/shal-black.jpeg", stock: 1 },
+                { name: "كشمير", hex: "#e892a0", image: "images/shal-kashmir.jpeg", stock: 1 },
+                { name: "كحلي", hex: "#1e3a8a", image: "images/shal-kohly.jpeg", stock: 1 },
+                { name: "نبيتي", hex: "#7f1d1d", image: "images/shal-nbiti.jpeg", stock: 1 },
+                { name: "أبيض", hex: "#ffffff", image: "images/shal-white.jpeg", stock: 1 },
+                { name: "أوف وايت", hex: "#fef3c7", image: "images/shal-offwhite.jpeg", stock: 1 }
+            ]},
+            { id: 3, name: "ودانات فرو ناعمة", price: 270, colors: [
+                { name: "كشمير", hex: "#e892a0", image: "images/earmuffs-pink.jpg", stock: 2 },
+                { name: "أوف وايت", hex: "#fef3c7", image: "images/earmuffs-white.jpg", stock: 4 },
+                { name: "كافيه", hex: "#d2b48c", image: "images/earmuffs-beige.jpg", stock: 4 },
+                { name: "أسود", hex: "#1f2937", image: "images/earmuffs-black.jpg", stock: 2 }
+            ]},
+            { id: 4, name: "إسفنجة تصفيف الشعر ويفي بدون حرارة", price: 175, usageImage: "images/roller-usage.jpg", colors: [
+                { name: "بينك", hex: "#f472b6", image: "images/roller-pink.jpg", stock: 4 },
+                { name: "بينك غامق", hex: "#db2777", image: "images/roller-darkpink.jpg", stock: 6 },
+                { name: "أوف وايت", hex: "#fef3c7", image: "images/roller-white.jpg", stock: 4 },
+                { name: "بيربل", hex: "#c084fc", image: "images/roller-purple.jpg", stock: 6 },
+                { name: "أسود", hex: "#1f2937", image: "images/roller-black.jpg", stock: 3 }
+            ]},
+            { id: 5, name: "بيزك عجينة مستوردة ون سايز", price: 350, colors: [
+                { name: "بيج", hex: "#d2b48c", image: "images/bais-beig.jpg", stock: 2 },
+                { name: "أسود", hex: "#1f2937", image: "images/bais-black.jpg", stock: 1 },
+                { name: "رمادي فاتح", hex: "#d1d5db", image: "images/bais-lightgray.jpg", stock: 1 },
+                { name: "نبيتي", hex: "#7f1d1d", image: "images/bais-nbiti.jpeg", stock: 1 },
+                { name: "أوف وايت", hex: "#fef3c7", image: "images/bais-offwhite.jpeg", stock: 1 },
+                { name: "أخضر/زيتي", hex: "#14532d", image: "images/bais-green.jpeg", stock: 1 }
+            ]},
+            { id: 6, name: "بيزك عجينة صباغ ون سايز", price: 300, colors: [
+                { name: "أسود", hex: "#1f2937", image: "images/bloz-black.jpeg", stock: 1 },
+                { name: "أخضر/زيتي", hex: "#14532d", image: "images/bloz-green.jpeg", stock: 1 },
+                { name: "كشمير", hex: "#e892a0", image: "images/bloz-kashmir.jpeg", stock: 1 },
+                { name: "موف", hex: "#c084fc", image: "images/bloz-mowv.jpeg", stock: 1 },
+                { name: "نبيتي", hex: "#7f1d1d", image: "images/bloz-nbiti.jpeg", stock: 1 },
+                { name: "أوف وايت", hex: "#fef3c7", image: "images/bloz-offwhite.jpeg", stock: 1 }
+            ]},
+            { id: 7, name: "بيزك شي ان ون سايز", price: 350, colors: [
+                { name: "أسود", hex: "#1f2937", image: "images/hav-black.jpeg", stock: 1 },
+                { name: "بني", hex: "#78350f", image: "images/hav-brown.jpeg", stock: 1 },
+                { name: "رمادي فاتح", hex: "#d1d5db", image: "images/hav-lightgray.jpeg", stock: 1 },
+                { name: "نبيتي", hex: "#7f1d1d", image: "images/hav-nbiti.jpeg", stock: 1 },
+                { name: "أوف وايت", hex: "#fef3c7", image: "images/hav-offwhite.jpeg", stock: 1 },
+                { name: "أساسي", hex: "#4b5563", image: "images/hav.jpeg", stock: 1 }
+            ]},
+            { id: 8, name: "طقم دفاية قطعتين مبطن ون سايز", price: 250, colors: [
+                { name: "أسود", hex: "#1f2937", image: "images/warm.jpeg", stock: 6 }
+            ]},
+            { id: 9, name: "كارديجان تريكو أنيق أوفر سايز", price: 500, colors: [
+                { name: "بيج", hex: "#d2b48c", image: "images/carden-beig.jpg", stock: 1 },
+                { name: "رمادي", hex: "#9ca3af", image: "images/carden-gray.jpg", stock: 1 },
+                { name: "نبيتي", hex: "#7f1d1d", image: "images/carden-nbiti.jpg", stock: 1 }
+            ]}
         ];
 
         let cart = [];
@@ -377,7 +315,6 @@
             }
         });
 
-        // جلب المخزون المباشر من Google Sheets عند فتح الموقع
         async function fetchStockFromSheet() {
             if (!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL === "ضعي_رابط_جوجل_شيت_هنا") return;
             
@@ -393,19 +330,50 @@
                     if (prod) {
                         const col = prod.colors.find(c => c.name.trim() === String(row.color).trim());
                         if (col) {
+                            if (row.price !== undefined) prod.price = Number(row.price);
                             col.stock = Number(row.stock);
                         }
                     }
                 });
                 displayProducts();
             } catch (err) {
-                console.error("خطأ في جلب المخزون من Google Sheets:", err);
+                console.error("خطأ في جلب البيانات:", err);
             } finally {
                 loadingMsg.classList.add("hidden");
             }
         }
 
-        // إظهار أو إخفاء العنوان بناءً على طريقة الاستلام
+        function handleVote(button, productName, voteType) {
+            const parent = button.parentElement;
+            const msgEl = parent.nextElementSibling;
+            parent.classList.add('hidden');
+            msgEl.classList.remove('hidden');
+            
+            if (voteType === 'نعم') {
+                msgEl.innerText = "شكراً لاهتمامك! سيتم تحويلك للواتساب للتأكيد ✨";
+                msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-green-600";
+            } else {
+                msgEl.innerText = "شكراً لمشاركتك، سنوفر الأفضل دائماً 🤍";
+                msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-gray-500";
+            }
+
+            if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL !== "ضعي_رابط_جوجل_شيت_هنا") {
+                fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ type: "poll", productName: productName, vote: voteType })
+                }).catch(err => console.error("خطأ في تسجيل التصويت:", err));
+            }
+
+            if (voteType === 'نعم') {
+                setTimeout(() => {
+                    const pollMsg = encodeURIComponent(`مرحباً خزانة ماريا الصغيرة 🌸 أنا مهتم بشراء قطعة "${productName}" لو توفرت قريباً.`);
+                    window.open(`https://wa.me/${whatsappNumber}?text=${pollMsg}`, "_blank");
+                }, 1000);
+            }
+        }
+
         function handleDeliveryChange() {
             const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
             const addressContainer = document.getElementById("addressContainer");
@@ -416,20 +384,6 @@
                 addressContainer.classList.remove("hidden");
             }
             updateTotal();
-        }
-
-        function handleVote(button, type) {
-            const parent = button.parentElement;
-            const msgEl = parent.nextElementSibling;
-            parent.classList.add('hidden');
-            msgEl.classList.remove('hidden');
-            if (type === 'yes') {
-                msgEl.innerText = "شكراً لكم! يسعدنا أنها نالت إعجابكم ✨";
-                msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-green-600";
-            } else {
-                msgEl.innerText = "شكراً لمشاركتكم، سنوفر الأفضل دائماً 🤍";
-                msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-gray-500";
-            }
         }
 
         function openLightbox(imgSrc) {
@@ -698,7 +652,7 @@
 
             message += `\n📦 *مجموع المنتجات:* ${subtotal} ج.م`;
             message += `\n🚚 *رسوم التوصيل:* ${deliveryFee} ج.م`;
-            message += `\n💰 *الإجمالي النهائي:* ${finalTotal} ج.م\n\n✨ ستبدأ ماريا بتجهيز طلبكم بكل حب 🌸 لأنكم جزء من حلمي الصغير🤍`;
+            message += `\n💰 *الإجمالي النهائي:* ${finalTotal} ج.م\n\n✨ بانتظار تجهيز الطلب بحب لماريا ودعم مشروعها الصغير! 🤍`;
 
             if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL !== "ضعي_رابط_جوجل_شيت_هنا") {
                 fetch(GOOGLE_SHEET_URL, {
