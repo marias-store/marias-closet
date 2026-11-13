@@ -322,7 +322,7 @@
             loadingMsg.classList.remove("hidden");
 
             try {
-                const response = await fetch(GOOGLE_SHEET_URL);
+                const response = await fetch(GOOGLE_SHEET_URL + "?t=" + Date.now());
                 const sheetData = await response.json();
                 
                 sheetData.forEach(row => {
@@ -442,13 +442,19 @@
                     `;
                 }
 
-                let stockBadgeHtml = availableStock > 0 
-                    ? `<span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">المتوفر: ${availableStock} قطع</span>`
-                    : `<span class="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold">نفذت الكمية ❌</span>`;
+                let stockBadgeHtml = "";
+                let buttonHtml = "";
 
-                let buttonHtml = availableStock > 0
-                    ? `<button onclick="addToCart(${product.id})" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm py-2 px-3 rounded-lg font-medium transition">أضف للسلة 🛍️</button>`
-                    : `<button disabled class="w-full bg-gray-300 text-gray-500 text-sm py-2 px-3 rounded-lg font-medium cursor-not-allowed">غير متوفر حالياً</button>`;
+                if (availableStock > 0) {
+                    stockBadgeHtml = `<span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">المتوفر: ${availableStock} قطع</span>`;
+                    buttonHtml = `<button onclick="addToCart(${product.id})" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm py-2 px-3 rounded-lg font-medium transition">أضف للسلة 🛍️</button>`;
+                } else if (qtyInCart > 0) {
+                    stockBadgeHtml = `<span class="text-xs bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full font-bold">في سلتك (${qtyInCart}) 🛒</span>`;
+                    buttonHtml = `<button disabled class="w-full bg-pink-100 text-pink-600 text-sm py-2 px-3 rounded-lg font-medium cursor-not-allowed">أضفت كامل الكمية للسلة ✓</button>`;
+                } else {
+                    stockBadgeHtml = `<span class="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold">نفذت الكمية ❌</span>`;
+                    buttonHtml = `<button disabled class="w-full bg-gray-300 text-gray-500 text-sm py-2 px-3 rounded-lg font-medium cursor-not-allowed">غير متوفر حالياً</button>`;
+                }
 
                 grid.innerHTML += `
                     <div class="bg-white rounded-xl shadow-sm p-4 border border-pink-100 flex flex-col justify-between hover:shadow-md transition">
