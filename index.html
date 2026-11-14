@@ -350,7 +350,7 @@
             msgEl.classList.remove('hidden');
             
             if (voteType === 'نعم') {
-                msgEl.innerText = "شكراً لاهتمامك! سيتم تحويلك للواتساب للتأكيد ✨";
+                msgEl.innerText = "شكراً لاهتمامك! تم تسجيل رأيك بنجاح ✨";
                 msgEl.className = "vote-msg text-[11px] font-bold mt-1 text-green-600";
             } else {
                 msgEl.innerText = "شكراً لمشاركتك، سنوفر الأفضل دائماً 🤍";
@@ -364,13 +364,6 @@
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ type: "poll", productName: productName, vote: voteType })
                 }).catch(err => console.error("خطأ في تسجيل التصويت:", err));
-            }
-
-            if (voteType === 'نعم') {
-                setTimeout(() => {
-                    const pollMsg = encodeURIComponent(`مرحباً خزانة ماريا الصغيرة 🌸 أنا مهتم بشراء قطعة "${productName}" لو توفرت قريباً.`);
-                    window.open(`https://wa.me/${whatsappNumber}?text=${pollMsg}`, "_blank");
-                }, 1000);
             }
         }
 
