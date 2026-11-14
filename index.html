@@ -615,22 +615,22 @@
             
             let deliveryText = "";
             if (deliveryType === 'delivery') {
-                deliveryText = subtotal >= 600 ? 'توصيل للمنزل (مجاني 🎉)' : 'توصيل للمنزل (75 ج.م)';
+                deliveryText = subtotal >= 600 ? 'توصيل للمنزل (مجاني \u{1F389})' : 'توصيل للمنزل (75 ج.م)';
             } else {
                 deliveryText = 'استلام من المقر (التجمع الأول - المجاورة 6 - فيلا 250)';
             }
 
             let paymentText = (paymentType === 'vodafone') ? 'فودافون كاش (01099771745)' : 'الدفع عند الاستلام';
 
-            let message = "🌸 *طلب جديد من خزانة ماريا الصغيرة* 🎀\n\n";
-            message += `👤 *اسم العميل:* ${name}\n`;
-            message += `📞 *رقم الهاتف:* ${phone}\n`;
+            let message = "\u{1F338} *طلب جديد من خزانة ماريا الصغيرة* \u{1F380}\n\n";
+            message += `\u{1F464} *اسم العميل:* ${name}\n`;
+            message += `\u{1F4DE} *رقم الهاتف:* ${phone}\n`;
             if (deliveryType === 'delivery') {
-                message += `📍 *العنوان:* ${address}\n`;
+                message += `\u{1F4CD} *العنوان:* ${address}\n`;
             }
-            message += `🚚 *طريقة الاستلام:* ${deliveryText}\n`;
-            message += `💳 *طريقة الدفع:* ${paymentText}\n\n`;
-            message += `🛒 *المنتجات المطلوبة:*\n`;
+            message += `\u{1F69A} *طريقة الاستلام:* ${deliveryText}\n`;
+            message += `\u{1F4B3} *طريقة الدفع:* ${paymentText}\n\n`;
+            message += `\u{1F6D2} *المنتجات المطلوبة:*\n`;
 
             const orderPayload = [];
 
@@ -649,9 +649,9 @@
 
             let finalTotal = subtotal + deliveryFee;
 
-            message += `\n📦 *مجموع المنتجات:* ${subtotal} ج.م`;
-            message += `\n🚚 *رسوم التوصيل:* ${deliveryFee} ج.م`;
-            message += `\n💰 *الإجمالي النهائي:* ${finalTotal} ج.م\n\n✨ 🌸ستبدأ ماريا بتجهيز طلبكم بكل حب🤍لأنكم جزء من حلمي الصغير`;
+            message += `\n\u{1F4E6} *مجموع المنتجات:* ${subtotal} ج.م`;
+            message += `\n\u{1F69A} *رسوم التوصيل:* ${deliveryFee} ج.م`;
+            message += `\n\u{1F4B0} *الإجمالي النهائي:* ${finalTotal} ج.م\n\n\u{2728} \u{1F338}ستبدأ ماريا بتجهيز طلبكم بكل حب\u{1F90D}لأنكم جزء من حلمي الصغير`;
 
             if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL !== "ضعي_رابط_جوجل_شيت_هنا") {
                 fetch(GOOGLE_SHEET_URL, {
@@ -667,7 +667,7 @@
             displayProducts();
 
             const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
+            window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`, "_blank");
         }
 
         displayProducts();
